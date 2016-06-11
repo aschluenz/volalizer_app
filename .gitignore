@@ -6,3 +6,18 @@
 .DS_Store
 /build
 /captures
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+app/libs/
+app/src/main/java/volalizer/volalizer/fragments/
+app/src/main/java/volalizer/volalizer/managers/
+app/src/main/java/volalizer/volalizer/models/
+app/src/main/java/volalizer/volalizer/network/
+app/src/main/java/volalizer/volalizer/utils/
+app/src/main/res/drawable/
