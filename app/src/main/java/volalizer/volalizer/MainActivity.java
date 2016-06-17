@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         numbOfTabs = mNumOfTabs;
 
         //create Toolbar
-        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+      //  toolbar = (Toolbar) findViewById(R.id.tool_bar);
         //setSupportActionBar(toolbar);
         //create viewPagerAdapter
         adapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, numbOfTabs);
