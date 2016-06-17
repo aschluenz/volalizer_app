@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:id="@+id/layoutRecordFrag"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <android.support.v7.widget.AppCompatImageButton
         android:id="@+id/btn_play"
@@ -8,4 +9,31 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"/>
+
+    <RelativeLayout
+        android:id="@+id/switchLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        >
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_marginLeft="15dp"
+            android:text="Indoor"
+            android:id="@+id/switchText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            />
+
+        <android.support.v7.widget.SwitchCompat
+            android:layout_marginRight="5dp"
+            android:id="@+id/switch_indoor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
 </RelativeLayout>
