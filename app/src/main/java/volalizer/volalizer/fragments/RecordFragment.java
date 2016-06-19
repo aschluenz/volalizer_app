@@ -8,12 +8,15 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -22,13 +25,18 @@ import volalizer.volalizer.R;
 /**
  * Created by andyschlunz on 11.06.16.
  */
-public class RecordFragment extends Fragment {
+public class RecordFragment extends Fragment implements View.OnClickListener {
 
     private static String m_fileName = null;
+
+    private SwitchCompat indoorSwitch;
+
     private RecordButton mRecordbutton = null;
     private MediaRecorder mMediaRecorder = null;
     private PlayButton mPlayButton = null;
     private MediaPlayer mMediaPlayer = null;
+
+    private ImageButton recBtn;
 
 
     @Override
@@ -42,6 +50,12 @@ public class RecordFragment extends Fragment {
         ll.addView(mPlayButton, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT,0));
         getActivity().setContentView(ll);
         */
+
+        recBtn = (ImageButton) v.findViewById(R.id.btn_play);
+        recBtn.setOnClickListener(this);
+
+        indoorSwitch = (SwitchCompat) v.findViewById(R.id.switch_indoor);
+        //indoorSwitch.setOnClickListener(this);
         return v;
     }
 
@@ -101,6 +115,12 @@ public class RecordFragment extends Fragment {
             Log.e("Player", "Not playing");
         }
         mMediaRecorder.start();
+    }
+
+    @Override
+    public void onClick(View v) {
+        Toast.makeText(this.getActivity(),
+                "Eh Basti!", Toast.LENGTH_LONG).show();
     }
 
     class RecordButton extends Button {
