@@ -1,9 +1,17 @@
 package volalizer.volalizer;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import volalizer.volalizer.managers.ViewPagerAdapter;
 import volalizer.volalizer.utils.SlidingTabLayout;
@@ -11,6 +19,9 @@ import volalizer.volalizer.utils.SlidingTabLayout;
 public class MainActivity extends AppCompatActivity {
 
 
+    int MY_PERMISSIONS_REQUEST_READ_PHONE_STATE;
+    TelephonyManager tm;
+    String EMEI;
     Toolbar toolbar;
     ViewPager pager;
     ViewPagerAdapter adapter;
@@ -23,11 +34,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        CharSequence mtitles[] = getResources().getStringArray(R.array.tab_names);
-        Titles = mtitles;
+        checkForPermissions(this);
 
-        int mNumOfTabs = Integer.parseInt(getResources().getString(R.string.tab_num));
-        numbOfTabs = mNumOfTabs;
+        Titles = getResources().getStringArray(R.array.tab_names);
+
+        tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+
+    //    Log.e("Telephone Stage", tm.toString());
+
+      //  EMEI = tm.getDeviceId();
+
+        numbOfTabs = Integer.parseInt(getResources().getString(R.string.tab_num));
 
         //create Toolbar
       //  toolbar = (Toolbar) findViewById(R.id.tool_bar);
@@ -49,6 +66,20 @@ public class MainActivity extends AppCompatActivity {
         });
         tabs.setViewPager(pager);
     }
+
+    private void checkForPermissions(Context context) {
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(context,
+                Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED){
+
+        }else{
+            ActivityCompat.requestPermissions((Activity) context,
+                    new String[]{Manifest.permission.READ_PHONE_STATE},
+                    MY_PERMISSIONS_REQUEST_READ_PHONE_STATE);
+
+        }
+    }
+
 
 /*
     @Override

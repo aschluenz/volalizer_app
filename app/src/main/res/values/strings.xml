@@ -11,4 +11,8 @@
     </string-array>
     <string name="tab_num">2</string>
 
+
+    <string name="api_password"></string>
+    <string name="api_user"></string>
+
 </resources>

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import volalizer.volalizer.R;
+import volalizer.volalizer.models.Record;
 
 /**
  * Created by andyschlunz on 19.06.16.
@@ -16,7 +17,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     private static final String TAG = "ListAdapter";
 
-    private String[] mDataSet;
+    private Record[] mDataSet;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -29,7 +30,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Log.d(TAG, "Element " + position + " set.");
-        holder.getTextView().setText(mDataSet[position]);
+        holder.getTextView().setText(mDataSet[position].getComment());
     }
 
     @Override
@@ -60,7 +61,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         }
     }
 
-    public ListAdapter(String[] dataSet) {
+    public ListAdapter(Record[] dataSet) {
         mDataSet = dataSet;
     }
 }
