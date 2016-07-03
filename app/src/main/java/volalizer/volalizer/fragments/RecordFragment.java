@@ -15,12 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import java.io.IOException;
 
 import volalizer.volalizer.R;
+import volalizer.volalizer.sound.SoundRecording;
 
 /**
  * Created by andyschlunz on 11.06.16.
@@ -28,6 +27,8 @@ import volalizer.volalizer.R;
 public class RecordFragment extends Fragment implements View.OnClickListener {
 
     private static String m_fileName = null;
+
+
 
     private SwitchCompat indoorSwitch;
 
@@ -42,14 +43,6 @@ public class RecordFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.tab_record,container,false);
-
-       /* LinearLayout ll = new LinearLayout(getActivity());
-          mRecordbutton = new RecordButton(getActivity());
-          mPlayButton = new PlayButton(getActivity());
-        ll.addView(mRecordbutton, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT,0));
-        ll.addView(mPlayButton, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT,0));
-        getActivity().setContentView(ll);
-        */
 
         recBtn = (ImageButton) v.findViewById(R.id.btn_play);
         recBtn.setOnClickListener(this);
@@ -119,8 +112,11 @@ public class RecordFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Toast.makeText(this.getActivity(),
-                "Eh Basti!", Toast.LENGTH_LONG).show();
+        //call asynctask
+        SoundRecording sp = new SoundRecording(getContext());
+        sp.execute();
+
+
     }
 
     class RecordButton extends Button {

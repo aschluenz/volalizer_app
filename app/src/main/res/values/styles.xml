@@ -12,4 +12,14 @@
         <item name="android:windowBackground">@drawable/launchscreen</item>
     </style>
 
+
+    <!-- Style for Recording Dialog  -->
+    <style name="CustomRecordDialog" parent="Theme.AppCompat.DayNight.Dialog">
+        <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
+        <item name="DialogTitleText">Recording…</item>
+        <item name="DialogSpotColor">@color/colorPrimary</item>
+        <item name="DialogSpotCount">4</item>
+    </style>
+
+
 </resources>
