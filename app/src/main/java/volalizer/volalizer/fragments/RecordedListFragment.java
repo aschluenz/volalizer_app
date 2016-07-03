@@ -1,15 +1,22 @@
 package volalizer.volalizer.fragments;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.Date;
 
@@ -22,7 +29,14 @@ import volalizer.volalizer.network.OkHttp;
 /**
  * Created by andyschlunz on 11.06.16.
  */
-public class RecordedListFragment extends Fragment {
+public class RecordedListFragment extends Fragment implements ActivityCompat.OnRequestPermissionsResultCallback {
+
+    public static final String TAG = "RecordedListFragment";
+
+
+    private static final int REQUEST_READ_PHONE_STATE = 0;
+
+    private View mLayout;
 
 
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
@@ -32,7 +46,7 @@ public class RecordedListFragment extends Fragment {
     protected RecyclerView.LayoutManager mLayoutManager;
 
     protected ListAdapter mAdapter;
-    protected String IMEI;
+    private static String IMEI;
 
     protected Record[] mDataset;
     private static final int DATASET_COUNT = 2;
@@ -41,10 +55,52 @@ public class RecordedListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            requestReadPhoneStatePermission();
+        }else{
+            Log.e(TAG, "Read Phone State permission has already been granted.");
+            //do the magic here
+            getUserIMEI();
+
+
+        }
+
+
         // startWebService(getActivity().getIntent().getExtras().getString("EMEI"));
 
         initDataset();
 
+
+    }
+
+    private void getUserIMEI() {
+
+        TelephonyManager tm = (TelephonyManager)getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+        IMEI = tm.getDeviceId();
+
+Log.e(TAG, IMEI);
+    }
+
+    private void requestReadPhoneStatePermission() {
+        Log.i(TAG, "Read Phone State permission has NOT been granted. Requesting permission.");
+        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_PHONE_STATE)) {
+            Snackbar.make(mLayout, R.string.permission_read_phone_state_rationale,
+                    Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.ok, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            ActivityCompat.requestPermissions(getActivity(),
+                                    new String[]{Manifest.permission.READ_PHONE_STATE},
+                                    REQUEST_READ_PHONE_STATE);
+                        }
+                    })
+                    .show();
+        } else {
+
+            // Camera permission has not been granted yet. Request it directly.
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_PHONE_STATE},
+                    REQUEST_READ_PHONE_STATE);
+        }
 
     }
 

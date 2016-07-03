@@ -16,6 +16,7 @@
 
     <string name="permission_record_audio_rationale">Record Audio permission is needed to start recording sound.</string>
     <string name="permission_write_external_storage_rationale">Write External Storage permission is needed to start recording sound.</string>
+    <string name="permission_read_phone_state_rationale">Read Phone State permission is needed to get your List.</string>
 
 
 </resources>

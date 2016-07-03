@@ -1,7 +1,6 @@
 package volalizer.volalizer.fragments;
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
