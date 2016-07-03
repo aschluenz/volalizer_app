@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Volalizer</string>
 
+
+    <string name="ok">OK</string>
     <!-- Titles for Appbar Tabs -->
     <string-array name="tab_names">
         <item>Record</item>
@@ -10,5 +12,10 @@
 
     <string name="api_password"></string>
     <string name="api_user"></string>
+
+
+    <string name="permission_record_audio_rationale">Record Audio permission is needed to start recording sound.</string>
+    <string name="permission_write_external_storage_rationale">Write External Storage permission is needed to start recording sound.</string>
+
 
 </resources>
