@@ -1,16 +1,12 @@
 <resources>
     <string name="app_name">Volalizer</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <!-- Titles for Appbar Tabs -->
     <string-array name="tab_names">
         <item>Record</item>
         <item>Your Records</item>
     </string-array>
     <string name="tab_num">2</string>
-
 
     <string name="api_password"></string>
     <string name="api_user"></string>

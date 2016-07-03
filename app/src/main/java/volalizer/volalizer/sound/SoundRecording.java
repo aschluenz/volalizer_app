@@ -7,6 +7,7 @@ import android.util.Log;
 
 import dmax.dialog.SpotsDialog;
 import volalizer.volalizer.R;
+import volalizer.volalizer.utils.SoundRecorder;
 
 /**
  * Created by andyschlunz on 03.07.16.
@@ -34,7 +35,12 @@ public class SoundRecording extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... params) {
-
+        SoundRecorder soundRecorder = new SoundRecorder();
+        try {
+            soundRecorder.doRecord();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         Log.e("SoundRecording", "I'm in doinbackground");
         return null;

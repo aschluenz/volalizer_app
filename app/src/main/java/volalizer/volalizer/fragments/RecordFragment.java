@@ -26,15 +26,11 @@ import volalizer.volalizer.sound.SoundRecording;
  */
 public class RecordFragment extends Fragment implements View.OnClickListener {
 
-    private static String m_fileName = null;
-
-
 
     private SwitchCompat indoorSwitch;
 
-    private RecordButton mRecordbutton = null;
-    private MediaRecorder mMediaRecorder = null;
-    private PlayButton mPlayButton = null;
+   // private RecordButton mRecordbutton = null;
+   // private PlayButton mPlayButton = null;
     private MediaPlayer mMediaPlayer = null;
 
     private ImageButton recBtn;
@@ -54,10 +50,9 @@ public class RecordFragment extends Fragment implements View.OnClickListener {
 
 
     public RecordFragment(){
-        m_fileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-        m_fileName += "/Audiotest.3gp";
-    }
 
+    }
+    /*
 
     private void onRecord(boolean start){
         if(start){
@@ -110,6 +105,8 @@ public class RecordFragment extends Fragment implements View.OnClickListener {
         mMediaRecorder.start();
     }
 
+    */
+
     @Override
     public void onClick(View v) {
         //call asynctask
@@ -118,7 +115,7 @@ public class RecordFragment extends Fragment implements View.OnClickListener {
 
 
     }
-
+    /*
     class RecordButton extends Button {
 
         public boolean mStartRecording = true;
@@ -153,6 +150,8 @@ public class RecordFragment extends Fragment implements View.OnClickListener {
             super(context);
             setOnClickListener(clicker);
         }
+
+        */
     }
 
-}
+
