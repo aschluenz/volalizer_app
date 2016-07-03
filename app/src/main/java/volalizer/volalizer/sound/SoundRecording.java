@@ -35,7 +35,9 @@ public class SoundRecording extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         dialog.dismiss();
-        mContext.startActivity(new Intent(mContext, RecordDetailActivity.class));
+        Intent i = new Intent(mContext, RecordDetailActivity.class);
+        i.putExtra("showSaveBtn", true);
+        mContext.startActivity(i);
 
     }
 

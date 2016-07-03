@@ -20,9 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     int MY_PERMISSIONS_REQUEST_READ_PHONE_STATE;
-    TelephonyManager tm;
-    String EMEI;
-    Toolbar toolbar;
     ViewPager pager;
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
@@ -38,18 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
         Titles = getResources().getStringArray(R.array.tab_names);
 
-        tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-
-    //    Log.e("Telephone Stage", tm.toString());
-
-      //  EMEI = tm.getDeviceId();
-
         numbOfTabs = Integer.parseInt(getResources().getString(R.string.tab_num));
 
-        //create Toolbar
-      //  toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        //setSupportActionBar(toolbar);
-        //create viewPagerAdapter
         adapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, numbOfTabs);
 
         pager = (ViewPager) findViewById(R.id.pager);
@@ -80,29 +67,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-}
- */
 }
