@@ -11,6 +11,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="volalizer.volalizer.RecordDetailActivity">
 
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/chart_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
     <android.support.design.widget.TextInputLayout
         android:id="@+id/text_input_layout"
         android:layout_width="match_parent"

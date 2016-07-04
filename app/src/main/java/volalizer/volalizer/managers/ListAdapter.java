@@ -2,6 +2,7 @@ package volalizer.volalizer.managers;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,8 +14,11 @@ import android.widget.TextView;
 
 import volalizer.volalizer.MainActivity;
 import volalizer.volalizer.R;
+import volalizer.volalizer.RecordDetailActivity;
 import volalizer.volalizer.models.Record;
 import volalizer.volalizer.utils.GeocoderHelper;
+
+import static android.support.v4.app.ActivityCompat.startActivity;
 
 /**
  * Created by andyschlunz on 19.06.16.
@@ -52,6 +56,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
 
+
+
     public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView location;
         TextView dbValue;
@@ -69,7 +75,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
 
 
-          /*  itemView.setOnClickListener(new View.OnClickListener(){
+            itemView.setOnClickListener(new View.OnClickListener(){
 
                 @Override
                 public void onClick(View v) {
@@ -78,7 +84,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 }
             });
 
-            */
+
         }
 
     }

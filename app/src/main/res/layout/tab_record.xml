@@ -9,6 +9,8 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:scaleType="fitCenter"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:padding="150px"
         android:layout_centerHorizontal="true"
         android:src="@drawable/record_button"

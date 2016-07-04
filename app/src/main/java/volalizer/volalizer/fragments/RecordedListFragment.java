@@ -129,7 +129,6 @@ Log.e(TAG, IMEI);
         // Set CustomAdapter as the adapter for RecyclerView.
         mRecyclerView.setAdapter(mAdapter);
 
-
         return rootView;
     }
 

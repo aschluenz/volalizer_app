@@ -5,6 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cv"
     app:cardPreventCornerOverlap="false"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     app:cardUseCompatPadding="true">
 
         <RelativeLayout

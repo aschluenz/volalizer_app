@@ -22,29 +22,20 @@ import volalizer.volalizer.sound.SoundRecording;
  */
 public class RecordFragment extends Fragment implements View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
-
     public static final String TAG = "RecordFragment";
-
     private SwitchCompat indoorSwitch;
-
     private ImageButton recBtn;
-
     private static final int REQUEST_RECORD_AUDIO = 0;
-
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 0;
-
     private View mLayout;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.tab_record, container, false);
-
         recBtn = (ImageButton) v.findViewById(R.id.btn_play);
         recBtn.setOnClickListener(this);
-
         indoorSwitch = (SwitchCompat) v.findViewById(R.id.switch_indoor);
-
         return v;
     }
 
@@ -109,7 +100,6 @@ public class RecordFragment extends Fragment implements View.OnClickListener, Ac
                     })
                     .show();
         } else {
-
             // Camera permission has not been granted yet. Request it directly.
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.RECORD_AUDIO},
                     REQUEST_RECORD_AUDIO);
