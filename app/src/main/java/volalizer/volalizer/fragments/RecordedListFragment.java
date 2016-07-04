@@ -33,14 +33,9 @@ public class RecordedListFragment extends Fragment implements ActivityCompat.OnR
 
     public static final String TAG = "RecordedListFragment";
 
-
     private static final int REQUEST_READ_PHONE_STATE = 0;
 
     private View mLayout;
-
-
-    private static final String KEY_LAYOUT_MANAGER = "layoutManager";
-
     protected RecyclerView mRecyclerView;
 
     protected RecyclerView.LayoutManager mLayoutManager;
@@ -64,8 +59,6 @@ public class RecordedListFragment extends Fragment implements ActivityCompat.OnR
 
 
         }
-
-
         // startWebService(getActivity().getIntent().getExtras().getString("EMEI"));
 
         initDataset();
@@ -125,9 +118,10 @@ Log.e(TAG, IMEI);
                     .findFirstCompletelyVisibleItemPosition();
         }
 
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        //mLayoutManager = new LinearLayoutManager(getActivity());
         // mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
         mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setHasFixedSize(true);
         mRecyclerView.scrollToPosition(scrollPosition);
 
 
@@ -145,8 +139,8 @@ Log.e(TAG, IMEI);
         mDataset = new Record[DATASET_COUNT];
         char user = 'a';
 
-        Record item = new Record(user, "element1", 45.676543, 56.678743, true, new Date());
-        Record item2 = new Record(user, "element2", 45.676543, 56.678743, true, new Date());
+        Record item = new Record("45,67",user, "element1", 45.676543, 56.678743, true, new Date());
+        Record item2 = new Record("56,56",user, "element2", 45.676543, 56.678743, true, new Date());
 
         mDataset[0] = item;
         mDataset[1] = item2;

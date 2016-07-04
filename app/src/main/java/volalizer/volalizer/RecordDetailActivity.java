@@ -2,6 +2,7 @@ package volalizer.volalizer;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -18,15 +19,13 @@ public class RecordDetailActivity extends AppCompatActivity {
 
         Bundle b = getIntent().getExtras();
         showSaveBtn = b.getBoolean("showSaveBtn");
-
         save_btn = (Button) findViewById(R.id.save_btn);
+        Log.e("ShowSaveBtn value:", String.valueOf(showSaveBtn));
         save_btn.setText("Save");
-        if(showSaveBtn){
-        save_btn.setVisibility(View.INVISIBLE);
-        }else{
+
+        if(showSaveBtn != true){
             save_btn.setVisibility(View.GONE);
         }
-
 
     }
 }

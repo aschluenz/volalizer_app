@@ -1,6 +1,5 @@
 package volalizer.volalizer.models;
 
-import java.security.Timestamp;
 import java.util.Date;
 
 /**
@@ -15,8 +14,11 @@ public class Record {
     private double longitude;
     private Boolean isIndoor;
     private Date date;
+    private String dbValue;
 
-    public Record(char user_Id, String comment, double latitude, double longitude, Boolean isIndoor, Date date) {
+
+    public Record(String dbValue, char user_Id, String comment, double latitude, double longitude, Boolean isIndoor, Date date) {
+        this.dbValue = dbValue;
         this.user_Id = user_Id;
         this.comment = comment;
         this.latitude = latitude;
@@ -79,5 +81,13 @@ public class Record {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getDbValue() {
+        return dbValue;
+    }
+
+    public void setDbValue(String dbValue) {
+        this.dbValue = dbValue;
     }
 }
