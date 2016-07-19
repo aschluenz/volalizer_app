@@ -15,7 +15,6 @@ import volalizer.volalizer.RecordDetailActivity;
  */
 public class SoundRecording extends AsyncTask<Void, Void, Void> {
 
-
     private AlertDialog dialog;
     private Context mContext;
     private boolean isIndoor;
@@ -44,19 +43,15 @@ public class SoundRecording extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... params) {
         SoundRecorder soundRecorder = new SoundRecorder();
-        SoundAnalyser soundAnalyser = new SoundAnalyser();
+       // SoundAnalyser soundAnalyser = new SoundAnalyser();
 
         try {
             soundRecorder.doRecord();
-            soundAnalyser.startAnalysing(isIndoor);
+         //   soundAnalyser.startAnalysing(isIndoor);
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
-
-
         Log.e("SoundRecording", "I'm in doinbackground");
         return null;
     }
