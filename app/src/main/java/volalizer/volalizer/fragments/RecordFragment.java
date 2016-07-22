@@ -44,13 +44,7 @@ public class RecordFragment extends Fragment implements View.OnClickListener, Ac
     public void onClick(View v) {
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             requestAudioRecordPermission();
-
-
         }
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-            requestWriteExternalStoragePermission();
-        }
-
         else {
             Log.e(TAG, "Audio Record permission has already been granted.");
             SoundRecording sp = new SoundRecording(getContext(), indoorSwitch.isChecked());
