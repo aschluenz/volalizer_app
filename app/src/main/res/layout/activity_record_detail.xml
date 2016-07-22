@@ -9,7 +9,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="volalizer.volalizer.RecordDetailActivity">
+    tools:context="volalizer.volalizer.RecordDetailActivity"
+    android:orientation="horizontal">
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/chart_bar"
@@ -26,7 +27,7 @@
             android:id="@+id/Comment_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Comment" />
+            android:hint="@string/comment" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.v7.widget.AppCompatButton
