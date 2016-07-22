@@ -43,11 +43,8 @@ public class SoundRecording extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... params) {
         SoundRecorder soundRecorder = new SoundRecorder();
-       // SoundAnalyser soundAnalyser = new SoundAnalyser();
-
         try {
             soundRecorder.doRecord();
-         //   soundAnalyser.startAnalysing(isIndoor);
 
         } catch (InterruptedException e) {
             e.printStackTrace();

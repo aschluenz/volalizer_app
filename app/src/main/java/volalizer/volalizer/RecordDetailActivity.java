@@ -177,7 +177,6 @@ public class RecordDetailActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     Log.e("response ", "onResponse(): " + response.body().string());
-                    //TODO make something here
                 }
             });
             return null;
