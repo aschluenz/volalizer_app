@@ -3,7 +3,6 @@ package volalizer.volalizer;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -18,10 +17,19 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.XAxis;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -57,11 +65,12 @@ public class RecordDetailActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         try {
             showSaveBtn = b.getBoolean("showSaveBtn");
+            dbValue = b.getDouble("dbValue");
         }catch (RuntimeException e){
             showSaveBtn = false;
         }
 
-        addLineChart();
+        drawBarChart();
         addTextFields();
 
         addsaveBtn(showSaveBtn);
@@ -75,8 +84,41 @@ public class RecordDetailActivity extends AppCompatActivity {
         mComment_Text_View = (EditText) findViewById(R.id.Comment_editText);
     }
 
-    private void addLineChart() {
+    private void drawBarChart() {
         barChart = (BarChart) findViewById(R.id.chart_bar);
+        YAxis yl = barChart.getAxisLeft();
+        yl.setEnabled(true);
+        yl.setDrawAxisLine(true);
+        yl.setDrawGridLines(false);
+        yl.setAxisLineWidth(3.0f);
+        yl.setAxisMaxValue(140f);
+        yl.setAxisMinValue(0f);
+
+
+        YAxis yr = barChart.getAxisRight();
+        yr.setEnabled(false);
+        yr.setDrawAxisLine(false);
+
+        XAxis x = barChart.getXAxis();
+        x.setTextSize(10f);
+        x.setDrawGridLines(false);
+        x.setDrawAxisLine(true);
+        x.setDrawLabels(false);
+
+        List<BarEntry> barEntries = new ArrayList<BarEntry>();
+        BarEntry entry = new BarEntry(0, (float) dbValue);
+        barEntries.add(entry);
+
+        BarDataSet bds = new BarDataSet(barEntries, "db");
+        bds.setAxisDependency(YAxis.AxisDependency.LEFT);
+
+        ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+        dataSets.add(bds);
+
+        BarData bd = new BarData(dataSets);
+
+        barChart.setData(bd);
+        barChart.invalidate();
     }
 
 
