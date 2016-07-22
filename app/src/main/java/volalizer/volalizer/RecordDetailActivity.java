@@ -32,6 +32,7 @@ import okhttp3.Response;
 
 public class RecordDetailActivity extends AppCompatActivity {
 
+    private final String log = "Visualization";
     private static final int REQUEST_LOCATION = 0;
     private View mLayout;
     private boolean showSaveBtn = false;
@@ -39,19 +40,23 @@ public class RecordDetailActivity extends AppCompatActivity {
     private Location mLocation;
     private String provider;
 
-    private BarChart bar_chart;
+    private BarChart barChart;
     private Button save_btn;
     private EditText mComment_Text_View;
 
     private float maxScale = 130;
 
+    private double dbValue = 0.0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.e(log, "Visualisierung wird gestartet...");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_detail);
 
         Bundle b = getIntent().getExtras();
         showSaveBtn = b.getBoolean("showSaveBtn");
+        dbValue = b.getDouble("dbValue");
 
         addLineChart();
         addTextFields();
@@ -60,6 +65,7 @@ public class RecordDetailActivity extends AppCompatActivity {
 
 
         Log.e("ShowSaveBtn value:", String.valueOf(showSaveBtn));
+        Log.e("DB Value: ", String.valueOf(dbValue));
     }
 
     private void addTextFields() {
@@ -67,18 +73,7 @@ public class RecordDetailActivity extends AppCompatActivity {
     }
 
     private void addLineChart() {
-        bar_chart = (BarChart) findViewById(R.id.chart_bar);
-        bar_chart.setScaleX(maxScale);
-
-        XAxis xAxis = bar_chart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setTextSize(10f);
-        xAxis.setTextColor(Color.RED);
-        xAxis.setDrawAxisLine(true);
-        xAxis.setDrawGridLines(false);
-
-
-        //bar_chart.setData();
+        barChart = (BarChart) findViewById(R.id.chart_bar);
     }
 
 
