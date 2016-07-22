@@ -15,13 +15,29 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -85,21 +101,24 @@ public class RecordDetailActivity extends AppCompatActivity {
         YAxis yl = barChart.getAxisLeft();
         yl.setEnabled(true);
         yl.setDrawAxisLine(true);
-        yl.setDrawGridLines(false);
-        yl.setAxisLineWidth(3.0f);
+        yl.setDrawGridLines(true);
         yl.setAxisMaxValue(140f);
         yl.setAxisMinValue(0f);
-
+        yl.setTextSize(12f);
 
         YAxis yr = barChart.getAxisRight();
         yr.setEnabled(false);
         yr.setDrawAxisLine(false);
 
         XAxis x = barChart.getXAxis();
-        x.setTextSize(10f);
+        x.setTextSize(20f);
+        x.setPosition(XAxis.XAxisPosition.BOTTOM);
         x.setDrawGridLines(false);
         x.setDrawAxisLine(true);
         x.setDrawLabels(false);
+
+        Legend legend = barChart.getLegend();
+        legend.setEnabled(false);
 
         List<BarEntry> barEntries = new ArrayList<BarEntry>();
         BarEntry entry = new BarEntry(0, (float) dbValue);
@@ -107,16 +126,48 @@ public class RecordDetailActivity extends AppCompatActivity {
 
         BarDataSet bds = new BarDataSet(barEntries, "db");
         bds.setAxisDependency(YAxis.AxisDependency.LEFT);
+        bds.setColor(ColorTemplate.rgb(getColorCode()));
 
         ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
         dataSets.add(bds);
 
         BarData bd = new BarData(dataSets);
+        bd.setValueTextSize(20f);
 
         barChart.setData(bd);
+        barChart.setDescription("in db");
+        barChart.animateY(1500, Easing.EasingOption.EaseInOutQuart);
         barChart.invalidate();
     }
 
+    private String getColorCode() {
+        if (dbValue < 10)
+            return "0DFF14";
+        else if (dbValue < 20)
+            return "4DE80C";
+        else if (dbValue < 30)
+            return "A0FF00";
+        else if (dbValue < 40)
+            return "DFE80D";
+        else if (dbValue < 50)
+            return "FFEB0D";
+        else if (dbValue < 60)
+            return "FFDF0D";
+        else if (dbValue < 70)
+            return "E8B60C";
+        else if (dbValue < 80)
+            return "FFAD00";
+        else if (dbValue < 90)
+            return "E88C0D";
+        else if (dbValue < 100)
+            return "FF780D";
+        else if (dbValue < 110)
+            return "FF5C0D";
+        else if (dbValue < 120)
+            return "E8350C";
+        else
+            return "FF0D00";
+    }
 
     private void addsaveBtn(boolean isVisible) {
         if (isVisible) {
