@@ -39,11 +39,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         Log.d(TAG, "Element " + position + " set.");
        // holder.location.setText(mDataSet[position].getAdress());
-        holder.dbValue.setText( mDataSet[position].getDbValue());
+        holder.dbValue.setText(String.valueOf(mDataSet[position].getDB_VALUE()));
     }
 
     @Override
     public int getItemCount() {
+        if(mDataSet == null){
+            return 0;
+        }
         return mDataSet.length;
     }
 
@@ -58,13 +61,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
         public ViewHolder(final View itemView) {
             super(itemView);
-
             cv = (CardView) itemView.findViewById(R.id.cv);
             //textView = (TextView) itemView.findViewById(R.id.textView);
             location = (TextView) itemView.findViewById(R.id.location);
             dbValue = (TextView) itemView.findViewById(R.id.db_value);
-
-
 
             itemView.setOnClickListener(new View.OnClickListener(){
 
