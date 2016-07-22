@@ -1,93 +1,80 @@
 package volalizer.volalizer.models;
 
-import java.util.Date;
-
 /**
  * Created by andyschlunz on 20.06.16.
  */
 public class Record {
 
-    private int id;
-    private char user_Id;
-    private String comment;
-    private double latitude;
-    private double longitude;
-    private Boolean isIndoor;
-    private Date date;
-    private String dbValue;
+    private int ID;
+    private String USER_ID;
+    private double LATITUDE;
+    private double LONGITUDE;
+    private String TIME;
+    private String COMMENT;
+    private int IS_INDOOR;
+    private double DB_VALUE;
 
-
-    public Record(String dbValue, char user_Id, String comment, double latitude, double longitude, Boolean isIndoor, Date date) {
-        this.dbValue = dbValue;
-        this.user_Id = user_Id;
-        this.comment = comment;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.isIndoor = isIndoor;
-        this.date = date;
+    public int getID() {
+        return ID;
     }
 
-    public int getId() {
-        return id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getUSER_ID() {
+        return USER_ID;
     }
 
-    public char getUser_Id() {
-        return user_Id;
+    public void setUSER_ID(String USER_ID) {
+        this.USER_ID = USER_ID;
     }
 
-    public void setUser_Id(char user_Id) {
-        this.user_Id = user_Id;
+    public double getLATITUDE() {
+        return LATITUDE;
     }
 
-    public String getComment() {
-        return comment;
+    public void setLATITUDE(double LATITUDE) {
+        this.LATITUDE = LATITUDE;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public double getLONGITUDE() {
+        return LONGITUDE;
     }
 
-    public double getLatitude() {
-        return latitude;
+    public void setLONGITUDE(double LONGITUDE) {
+        this.LONGITUDE = LONGITUDE;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public String getTIME() {
+        return TIME;
     }
 
-    public double getLongitude() {
-        return longitude;
+    public void setTIME(String TIME) {
+        this.TIME = TIME;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public String getCOMMENT() {
+        return COMMENT;
     }
 
-    public Boolean getIndoor() {
-        return isIndoor;
+    public void setCOMMENT(String COMMENT) {
+        this.COMMENT = COMMENT;
     }
 
-    public void setIndoor(Boolean indoor) {
-        isIndoor = indoor;
+    public int getIS_INDOOR() {
+        return IS_INDOOR;
     }
 
-    public Date getDate() {
-        return date;
+    public void setIS_INDOOR(int IS_INDOOR) {
+        this.IS_INDOOR = IS_INDOOR;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public double getDB_VALUE() {
+        return DB_VALUE;
     }
 
-    public String getDbValue() {
-        return dbValue;
-    }
-
-    public void setDbValue(String dbValue) {
-        this.dbValue = dbValue;
+    public void setDB_VALUE(double DB_VALUE) {
+        this.DB_VALUE = DB_VALUE;
     }
 }

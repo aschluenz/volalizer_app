@@ -9,7 +9,7 @@ import okhttp3.RequestBody;
 /**
  * Created by andyschlunz on 20.06.16.
  */
-public class OkHttp extends AsyncTask<Object, Boolean, String> {
+public class OkHttpHandlerPostRecord extends AsyncTask<Object, Boolean, String> {
 
     String userName, passWord, myURL;
 

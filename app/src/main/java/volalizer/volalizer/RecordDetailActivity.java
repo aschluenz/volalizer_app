@@ -55,8 +55,11 @@ public class RecordDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_record_detail);
 
         Bundle b = getIntent().getExtras();
-        showSaveBtn = b.getBoolean("showSaveBtn");
-        dbValue = b.getDouble("dbValue");
+        try {
+            showSaveBtn = b.getBoolean("showSaveBtn");
+        }catch (RuntimeException e){
+            showSaveBtn = false;
+        }
 
         addLineChart();
         addTextFields();
