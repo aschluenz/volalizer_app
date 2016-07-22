@@ -15,20 +15,24 @@ import volalizer.volalizer.RecordDetailActivity;
  */
 public class SoundRecording extends AsyncTask<Void, Void, Void> {
 
+    private final String log = "SoundRecording class";
+
     private AlertDialog dialog;
     private Context mContext;
     private boolean isIndoor;
-
+    private double dbValue;
 
     public SoundRecording(Context context,boolean isIndoor) {
         this.mContext = context;
         this.isIndoor = isIndoor;
+        this.dbValue = 0.0;
     }
 
     @Override
     protected void onPreExecute() {
         dialog = new SpotsDialog(mContext, R.style.CustomRecordDialog);
         dialog.show();
+
     }
 
     @Override
@@ -44,12 +48,11 @@ public class SoundRecording extends AsyncTask<Void, Void, Void> {
     protected Void doInBackground(Void... params) {
         SoundRecorder soundRecorder = new SoundRecorder();
         try {
-            soundRecorder.doRecord();
+            this.dbValue = soundRecorder.doRecord();
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Log.e("SoundRecording", "I'm in doinbackground");
         return null;
     }
 }
