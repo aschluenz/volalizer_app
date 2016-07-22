@@ -5,17 +5,6 @@ package volalizer.volalizer.models;
  */
 public class Record {
 
-    /**
-     * ID : 1
-     * USER_ID : 1234567890
-     * LATITUDE : 52.1
-     * LONGITUDE : 13.7
-     * TIME : 2016-07-05T20:17:00.000Z
-     * COMMENT : Testeintrag
-     * IS_INDOOR : 0
-     * DB_VALUE : 6.9
-     */
-
     private int ID;
     private String USER_ID;
     private double LATITUDE;

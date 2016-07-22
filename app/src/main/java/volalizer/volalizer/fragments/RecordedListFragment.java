@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,17 +24,10 @@ import volalizer.volalizer.network.OkHttpHandlerGetAllRecords.AsyncResponse;
 public class RecordedListFragment extends Fragment implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     public static final String TAG = "RecordedListFragment";
-
-
     protected RecyclerView mRecyclerView;
-
     protected RecyclerView.LayoutManager mLayoutManager;
-
     protected ListAdapter mAdapter;
-    private static String IMEI;
-
-    protected Record[] mDataset = null;
-    private static final int DATASET_COUNT = 2;
+    protected Record[] mDataSet = null;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,8 +37,7 @@ public class RecordedListFragment extends Fragment implements ActivityCompat.OnR
 
     private String getUserIMEI() {
         TelephonyManager tm = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
-        IMEI = tm.getDeviceId();
-        return IMEI;
+        return tm.getDeviceId();
     }
 
     @Override
@@ -62,7 +53,7 @@ public class RecordedListFragment extends Fragment implements ActivityCompat.OnR
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.scrollToPosition(scrollPosition);
-        mAdapter = new ListAdapter(mDataset);
+        mAdapter = new ListAdapter(mDataSet, getContext());
         // Set CustomAdapter as the adapter for RecyclerView.
         mRecyclerView.setAdapter(mAdapter);
         return rootView;
@@ -73,9 +64,8 @@ public class RecordedListFragment extends Fragment implements ActivityCompat.OnR
         OkHttpHandlerGetAllRecords all = (OkHttpHandlerGetAllRecords) new OkHttpHandlerGetAllRecords(new AsyncResponse() {
             @Override
             public void processFinish(Record[] output) {
-                mDataset = output;
-                Log.d("länge mdataset", String.valueOf(mDataset.length));
-                mAdapter = new ListAdapter(mDataset);
+                mDataSet = output;
+                mAdapter = new ListAdapter(mDataSet, getContext());
                 mRecyclerView.setAdapter(mAdapter);
             }
         }).execute(mIMEI);
