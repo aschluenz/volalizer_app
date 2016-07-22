@@ -25,8 +25,8 @@ public class OkHttpHandlerPostRecord extends AsyncTask<Object, Void, String> {
     @Override
     protected String doInBackground(Object[] params) {
         //json object as string
-        Gson gson = new Gson();
-        String json = gson.toJson(params[0]);
+       // Gson gson = new Gson();
+        String json = params[0].toString();
         Log.d(TAG,json);
         OkHttpClient client = new OkHttpClient();
             RequestBody body = RequestBody.create(JSON,json);
@@ -36,6 +36,7 @@ public class OkHttpHandlerPostRecord extends AsyncTask<Object, Void, String> {
                         .build();
                 Response response = null;
                 try {
+                   // client.newCall(request).execute();
                     response = client.newCall(request).execute();
                     return response.body().string();
                 } catch (IOException e) {

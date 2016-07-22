@@ -41,6 +41,7 @@ public class SoundRecording extends AsyncTask<Void, Void, Void> {
         Intent i = new Intent(mContext, RecordDetailActivity.class);
         i.putExtra("showSaveBtn", true);
         i.putExtra("dbValue", dbValue);
+        i.putExtra("isIndoor", isIndoor);
         mContext.startActivity(i);
 
     }

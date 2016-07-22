@@ -76,7 +76,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(v.getContext(), RecordDetailActivity.class);
-                    i.putExtra("record", (Parcelable) mDataSet[getAdapterPosition()]);
+                    i.putExtra("showSaveBtn", false);
+                    i.putExtra("dbValue", mDataSet[getAdapterPosition()].getDB_VALUE());
+                    i.putExtra("isIndoor", mDataSet[getAdapterPosition()].getIS_INDOOR());
+                    //i.putExtra("record", mDataSet[getAdapterPosition()]);
                     v.getContext().startActivity(i);
                 }
             });

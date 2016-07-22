@@ -14,8 +14,7 @@ public class Record {
     private int IS_INDOOR;
     private double DB_VALUE;
 
-    public int getID() {
-        return ID;
+    public int getID() {return ID;
     }
 
     public void setID(int ID) {
