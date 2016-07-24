@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
-import android.os.Parcelable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -62,7 +61,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView location;
         TextView dbValue;
-        //ImageView Image;
         CardView cv;
 
         public ViewHolder(final View itemView) {
@@ -79,7 +77,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                     i.putExtra("showSaveBtn", false);
                     i.putExtra("dbValue", mDataSet[getAdapterPosition()].getDB_VALUE());
                     i.putExtra("isIndoor", mDataSet[getAdapterPosition()].getIS_INDOOR());
-                    //i.putExtra("record", mDataSet[getAdapterPosition()]);
+                    i.putExtra("time", mDataSet[getAdapterPosition()].getTIME());
+                    i.putExtra("address", location.getText());
+                    i.putExtra("comment", mDataSet[getAdapterPosition()].getCOMMENT());
                     v.getContext().startActivity(i);
                 }
             });

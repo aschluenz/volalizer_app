@@ -19,6 +19,8 @@
     <string name="permission_read_phone_state_rationale">Read Phone State permission is needed to get your List.</string>
     <string name="permission_location_rationale">Location permission is needed to get your List.</string>
     <string name="comment">Comment</string>
+    <string name="Location">Location</string>
+    <string name="showMap">show Map</string>
 
 
 </resources>

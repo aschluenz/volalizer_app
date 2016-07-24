@@ -21,9 +21,8 @@ import volalizer.volalizer.network.OkHttpHandlerGetAllRecords.AsyncResponse;
 /**
  * Created by andyschlunz on 11.06.16.
  */
-public class RecordedListFragment extends Fragment implements ActivityCompat.OnRequestPermissionsResultCallback {
+public class RecordedListFragment extends Fragment {
 
-    public static final String TAG = "RecordedListFragment";
     protected RecyclerView mRecyclerView;
     protected RecyclerView.LayoutManager mLayoutManager;
     protected ListAdapter mAdapter;
@@ -32,12 +31,7 @@ public class RecordedListFragment extends Fragment implements ActivityCompat.OnR
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initDataset();
-    }
-
-    private String getUserIMEI() {
-        TelephonyManager tm = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
-        return tm.getDeviceId();
+        initDataSet();
     }
 
     @Override
@@ -59,7 +53,12 @@ public class RecordedListFragment extends Fragment implements ActivityCompat.OnR
         return rootView;
     }
 
-    private void initDataset() {
+    private String getUserIMEI() {
+        TelephonyManager tm = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+        return tm.getDeviceId();
+    }
+
+    private void initDataSet() {
         String mIMEI = getUserIMEI();
         OkHttpHandlerGetAllRecords all = (OkHttpHandlerGetAllRecords) new OkHttpHandlerGetAllRecords(new AsyncResponse() {
             @Override

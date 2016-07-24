@@ -1,5 +1,6 @@
 package volalizer.volalizer.fragments;
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,8 +14,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import volalizer.volalizer.R;
+import volalizer.volalizer.Webview;
 import volalizer.volalizer.sound.SoundRecording;
 
 /**
@@ -25,8 +28,8 @@ public class RecordFragment extends Fragment implements View.OnClickListener, Ac
     public static final String TAG = "RecordFragment";
     private SwitchCompat indoorSwitch;
     private ImageButton recBtn;
+    private Button showMap;
     private static final int REQUEST_RECORD_AUDIO = 0;
-    private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 0;
     private View mLayout;
 
 
@@ -36,7 +39,22 @@ public class RecordFragment extends Fragment implements View.OnClickListener, Ac
         recBtn = (ImageButton) v.findViewById(R.id.btn_play);
         recBtn.setOnClickListener(this);
         indoorSwitch = (SwitchCompat) v.findViewById(R.id.switch_indoor);
+        showMap = (Button) v.findViewById(R.id.openWebView_Btn);
+        showMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), Webview.class);
+                getContext().startActivity(i);
+            }
+        });
+
         return v;
+    }
+
+    public void startRecording(){
+        Log.e(TAG, "Audio Record permission has already been granted.");
+        SoundRecording sp = new SoundRecording(getContext(), indoorSwitch.isChecked());
+        sp.execute();
     }
 
 
@@ -46,63 +64,21 @@ public class RecordFragment extends Fragment implements View.OnClickListener, Ac
             requestAudioRecordPermission();
         }
         else {
-            Log.e(TAG, "Audio Record permission has already been granted.");
-            SoundRecording sp = new SoundRecording(getContext(), indoorSwitch.isChecked());
-            sp.execute();
-        }
-
-    }
-
-    private void requestWriteExternalStoragePermission() {
-        Log.i(TAG, "Write External Storage permission has NOT been granted. Requesting permission.");
-        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            Snackbar.make(mLayout, R.string.permission_write_external_storage_rationale,
-                    Snackbar.LENGTH_INDEFINITE)
-                    .setAction(R.string.ok, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            ActivityCompat.requestPermissions(getActivity(),
-                                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                    REQUEST_WRITE_EXTERNAL_STORAGE);
-                        }
-                    })
-                    .show();
-        } else {
-
-            // Camera permission has not been granted yet. Request it directly.
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    REQUEST_WRITE_EXTERNAL_STORAGE);
+         startRecording();
         }
     }
-
 
     private void requestAudioRecordPermission() {
         Log.i(TAG, "Record Audio permission has NOT been granted. Requesting permission.");
-
-        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.RECORD_AUDIO)) {
-
-
-            Snackbar.make(mLayout, R.string.permission_record_audio_rationale,
-                    Snackbar.LENGTH_INDEFINITE)
-                    .setAction(R.string.ok, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            ActivityCompat.requestPermissions(getActivity(),
-                                    new String[]{Manifest.permission.RECORD_AUDIO},
-                                    REQUEST_RECORD_AUDIO);
-                        }
-                    })
-                    .show();
-        } else {
-            // Camera permission has not been granted yet. Request it directly.
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.RECORD_AUDIO},
                     REQUEST_RECORD_AUDIO);
-        }
+
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        startRecording();
     }
 }
 

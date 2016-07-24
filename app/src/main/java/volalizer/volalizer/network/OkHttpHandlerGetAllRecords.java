@@ -1,7 +1,6 @@
 package volalizer.volalizer.network;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -10,7 +9,6 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Collection;
 
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -21,22 +19,18 @@ import volalizer.volalizer.models.Record;
  */
 public class OkHttpHandlerGetAllRecords extends AsyncTask<String, Boolean, Record[]> {
 
+    public static final String TAG = "OkHttpHandlerGetAllRecords";
+    private String getURL = "http://api-volalizer.rhcloud.com/get/";
+    public AsyncResponse delegate = null;
 
-    // you may separate this or combined to caller class.
+
     public interface AsyncResponse {
         void processFinish(Record[] output);
     }
 
-    public AsyncResponse delegate = null;
-
     public OkHttpHandlerGetAllRecords(AsyncResponse delegate) {
         this.delegate = delegate;
     }
-
-    public static final String TAG = "OkHttpHandlerGetAllRecords";
-    private String getURL = "http://api-volalizer.rhcloud.com/get/";
-
-    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
 
     @Override
@@ -56,13 +50,12 @@ public class OkHttpHandlerGetAllRecords extends AsyncTask<String, Boolean, Recor
                 e.printStackTrace();
             }
             String result = responses.body().string();
-            Log.d("serverantwort:",result);
 
             Gson gson = new Gson();
             Type collectionType = new TypeToken<Collection<Record>>() {
             }.getType();
-            Collection<Record> allrecord = gson.fromJson(result, collectionType);
-            return allrecord.toArray(new Record[allrecord.size()]);
+            Collection<Record> allRecord = gson.fromJson(result, collectionType);
+            return allRecord.toArray(new Record[allRecord.size()]);
             // JSONArray responseData = responses.body().string();
         } catch (IOException e) {
             e.printStackTrace();
@@ -71,7 +64,7 @@ public class OkHttpHandlerGetAllRecords extends AsyncTask<String, Boolean, Recor
     }
 
     @Override
-    protected void onPostExecute(Record[] records){
+    protected void onPostExecute(Record[] records) {
         delegate.processFinish(records);
     }
 }

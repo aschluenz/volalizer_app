@@ -14,14 +14,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -29,19 +25,9 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -59,11 +45,18 @@ public class RecordDetailActivity extends AppCompatActivity {
     private Location mLocation;
     private String provider;
 
+    private String time = "";
+    private String address_String = "";
+    private String comment_text = "";
+
     private BarChart barChart;
     private Button save_btn;
     private EditText mComment_Text_View;
+    private TextView mLocationText;
+    private TextView mDateText;
 
-    private float maxScale = 130;
+
+
 
     private double dbValue = 0.0;
     private boolean isIndoor;
@@ -73,20 +66,35 @@ public class RecordDetailActivity extends AppCompatActivity {
         Log.e(log, "Visualisierung wird gestartet...");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_detail);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestLocationPermission();
+        }
+
+        /**
+         *   i.putExtra("showSaveBtn", false); (/)
+         i.putExtra("dbValue", mDataSet[getAdapterPosition()].getDB_VALUE()); (/)
+         i.putExtra("isIndoor", mDataSet[getAdapterPosition()].getIS_INDOOR()); (/)
+         i.putExtra("time", mDataSet[getAdapterPosition()].getTIME()); (/)
+         i.putExtra("address", location.getText());
+         i.putExtra("comment", mDataSet[getAdapterPosition()].getCOMMENT());
+         */
 
         Bundle b = getIntent().getExtras();
         try {
             showSaveBtn = b.getBoolean("showSaveBtn");
             dbValue = b.getDouble("dbValue");
             isIndoor = b.getBoolean("isIndoor");
+            if(!showSaveBtn){
+                time = b.getString("time");
+                address_String = b.getString("address");
+                comment_text = b.getString("comment");
+            }
         } catch (RuntimeException e) {
-            showSaveBtn = false;
+            e.printStackTrace();
         }
         drawBarChart();
         addTextFields();
-
         addsaveBtn(showSaveBtn);
-
 
         Log.e("ShowSaveBtn value:", String.valueOf(showSaveBtn));
         Log.e("DB Value: ", String.valueOf(dbValue));
@@ -94,6 +102,16 @@ public class RecordDetailActivity extends AppCompatActivity {
 
     private void addTextFields() {
         mComment_Text_View = (EditText) findViewById(R.id.Comment_editText);
+        if(!showSaveBtn){
+            mComment_Text_View.setText(comment_text);
+            mComment_Text_View.setClickable(false);
+            mComment_Text_View.setFocusable(false);
+            mDateText = (TextView) findViewById(R.id.date_textview);
+            mDateText.setText(time);
+            mLocationText = (TextView) findViewById(R.id.location_textview);
+            mLocationText.setText(address_String);
+
+        }
     }
 
     private void drawBarChart() {
@@ -176,15 +194,15 @@ public class RecordDetailActivity extends AppCompatActivity {
             save_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Location location = getcurrentLocation();
+                    mLocation = getcurrentLocation();
+                    Log.d("location:", String.valueOf(mLocation.getLatitude()));
                     SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     String currentDateTime = sf.format(Calendar.getInstance().getTime());
-
                     JSONObject record = new JSONObject();
                     try {
                         record.put("imei", getUserIMEI());
-                        record.put("latitude", location.getLatitude());
-                        record.put("longitude", location.getLongitude());
+                        record.put("latitude", mLocation.getLatitude());
+                        record.put("longitude", mLocation.getLongitude());
                         record.put("time", currentDateTime);
                         record.put("comment", String.valueOf(mComment_Text_View.getText()));
                         record.put("isIndoor", isIndoor);
@@ -197,9 +215,11 @@ public class RecordDetailActivity extends AppCompatActivity {
                     finish();
                 }
             });
+        }else{
+            View button = findViewById(R.id.save_btn);
+           button.setVisibility(View.GONE);
         }
     }
-
 
     private Location getcurrentLocation() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -209,7 +229,6 @@ public class RecordDetailActivity extends AppCompatActivity {
         Criteria criteria = new Criteria();
         provider = lm.getBestProvider(criteria, false);
         mLocation = lm.getLastKnownLocation(provider);
-
         return mLocation;
     }
 

@@ -51,7 +51,6 @@ public class SoundRecording extends AsyncTask<Void, Void, Void> {
         SoundRecorder soundRecorder = new SoundRecorder();
         try {
             this.dbValue = soundRecorder.doRecord();
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
