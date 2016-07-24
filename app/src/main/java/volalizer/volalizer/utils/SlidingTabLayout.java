@@ -32,6 +32,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
+ * Klasse wurde aus Beispiel übernommen
+ */
+
+/**
  * To be used with ViewPager to provide a tab indicator component which give constant feedback as to
  * the user's scroll progress.
  * <p>
@@ -46,6 +50,7 @@ import android.widget.TextView;
  * <p>
  * The views used as tabs can be customized by calling {@link #setCustomTabView(int, int)},
  * providing the layout ID of your custom layout.
+ *
  */
 public class SlidingTabLayout extends HorizontalScrollView {
     /**

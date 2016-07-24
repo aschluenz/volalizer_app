@@ -50,5 +50,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="@string/showMap"
-        android:layout_gravity="bottom" />
+        android:layout_gravity="bottom"
+        android:background="@color/colorPrimary"/>
 </LinearLayout>
